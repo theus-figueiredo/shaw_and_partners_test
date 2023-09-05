@@ -1,4 +1,5 @@
 import express from "express";
+import userRouter from '../routes/userRoute';
 
 class App {
 
@@ -16,6 +17,7 @@ class App {
 
     public routes() {
         this.express.get('/', (_req, res) => res.send(`Hello there!!`));
+        this.express.use('/api/files', userRouter);
     }
 }
 
