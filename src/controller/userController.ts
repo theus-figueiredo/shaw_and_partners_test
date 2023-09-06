@@ -40,7 +40,6 @@ class UserController {
             const jsonData = JSON.stringify(uniqueData, null, 2);
     
             fs.writeFileSync(jsonFilePath, jsonData, 'utf-8');
-            console.log('Data saved to output.json');
           });
     
           stream.on('end', () => {
@@ -74,6 +73,10 @@ class UserController {
                     const valuesForSearch = Object.values(item).map((value) => value.toString().toLowerCase());
                     return valuesForSearch.some((value) => value.includes(query.toString().toLowerCase()));
                 });
+
+                if(results.length == 0) {
+                  return res.status(404).json({message: 'no matches found for the searched parameter'});
+                }
 
                 return res.status(200).json({data: results});
             });

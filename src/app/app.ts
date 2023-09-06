@@ -15,7 +15,7 @@ class App {
     }
 
     public routes() {
-        this.express.use('/api/files', userRouter);
+        this.express.use('/api', userRouter);
     }
 }
 
