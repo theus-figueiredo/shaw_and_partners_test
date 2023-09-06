@@ -54,11 +54,30 @@ class UserController {
       }
 
 
-
     public getData(req: Request, res: Response): Response {
         try {
             
-            
+            const query = req.query.q as string
+
+            if(!query) {
+                return res.status(400).json({ message: 'missing query parameter for search' });
+            }
+
+            const jsonFilePath = './src/data/output.json';
+
+            fs.readFile(jsonFilePath, 'utf-8', (error, data) => {
+                if(error) return res.status(500).json({ error: 'JSON file could not be read' });
+
+                const jsonData = JSON.parse(data);
+
+                const results = jsonData.filter((item) => {
+                    const valuesForSearch = Object.values(item).map((value) => value.toString().toLowerCase());
+                    return valuesForSearch.some((value) => value.includes(query.toLowerCase()));
+                });
+
+                return res.status(200).json({data: results});
+            });
+
 
         } catch (error) {
             return res.status(400).json({error: error.message});

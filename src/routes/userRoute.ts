@@ -16,5 +16,6 @@ const upload = multer({dest: 'uploads/', storage: storage}).single('file');
 const router = Router();
 
 router.post('/',  upload, userController.readCsvFile);
+router.get('/', userController.getData);
 
 export default router;
