@@ -5,7 +5,7 @@ import supertest from 'supertest';
 const request = supertest(app);
 
 describe('Search the data from the CSV file for matches to the string informed on query param', () => {
-    it('Should  return specif results when searching for "bask"', async () => {
+    it('Should  return specific results when searching for "bask"', async () => {
         const query = 'bask';
 
         const response = await request
