@@ -57,7 +57,7 @@ class UserController {
     public getData(req: Request, res: Response): Response {
         try {
             
-            const query = req.query.q as string
+            const query = req.query.q 
 
             if(!query) {
                 return res.status(400).json({ message: 'missing query parameter for search' });
@@ -72,7 +72,7 @@ class UserController {
 
                 const results = jsonData.filter((item) => {
                     const valuesForSearch = Object.values(item).map((value) => value.toString().toLowerCase());
-                    return valuesForSearch.some((value) => value.includes(query.toLowerCase()));
+                    return valuesForSearch.some((value) => value.includes(query.toString().toLowerCase()));
                 });
 
                 return res.status(200).json({data: results});
